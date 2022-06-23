@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32602.291
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Continero.Homework", "Continero.Homework.csproj", "{5E3709C4-BF7C-4693-B33D-8FAECFA3C7CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Continero.Homework.Tests", "..\Continero.Homework.Tests\Continero.Homework.Tests.csproj", "{9BA4619F-DBA3-4C56-9F3A-17D71951375F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E3709C4-BF7C-4693-B33D-8FAECFA3C7CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E3709C4-BF7C-4693-B33D-8FAECFA3C7CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E3709C4-BF7C-4693-B33D-8FAECFA3C7CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E3709C4-BF7C-4693-B33D-8FAECFA3C7CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BA4619F-DBA3-4C56-9F3A-17D71951375F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA4619F-DBA3-4C56-9F3A-17D71951375F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA4619F-DBA3-4C56-9F3A-17D71951375F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BA4619F-DBA3-4C56-9F3A-17D71951375F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5908C7DD-2EF7-4552-9BF7-D1D620F5DB94}
+	EndGlobalSection
+EndGlobal
