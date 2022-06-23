@@ -14,7 +14,7 @@ namespace Continero.Homework {
       AppDomain.CurrentDomain.UnhandledException += (sender, e) => {
         if (e.ExceptionObject is Exception exception)
           Console.WriteLine(exception);
-      };
+      }; 
 
       return this;
     }
