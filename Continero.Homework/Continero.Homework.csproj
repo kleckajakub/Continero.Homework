@@ -63,8 +63,6 @@
     <Compile Include="DocumentService.cs" />
     <Compile Include="Config\FakeConfigService.cs" />
     <Compile Include="IO\DirectoryFacade.cs" />
-    <Compile Include="Storages\DocumentStorageFactory.cs" />
-    <Compile Include="Storages\DocumentStorageType.cs" />
     <Compile Include="Storages\FileDocumentStorage.cs" />
     <Compile Include="Installers\ServicesInstaller.cs" />
     <Compile Include="IO\FileFacade.cs" />

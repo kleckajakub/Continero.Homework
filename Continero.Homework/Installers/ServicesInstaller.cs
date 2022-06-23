@@ -18,13 +18,11 @@ namespace Continero.Homework.Installers {
         Component.For<InMemoryDocumentStorage>().LifeStyle.Singleton,
         Component.For<XmlDocumentConvertor>().LifeStyle.Transient,
         Component.For<JsonDocumentConvertor>().LifeStyle.Transient,
-        Component.For<DocumentStorageFactory>().LifeStyle.Transient,
         Component.For<DocumentConvertorFactory>().LifeStyle.Transient
       );
 
-      var docService = new DocumentService(container.Resolve<FileDocumentStorage>(),
-        container.Resolve<FileDocumentStorage>(), container.Resolve<DocumentConvertorFactory>());
-
+      var docService = new DocumentService(container.Resolve<FileDocumentStorage>(), container.Resolve<FileDocumentStorage>(),
+        container.Resolve<DocumentConvertorFactory>());
       container.Register(Component.For<DocumentService>().Instance(docService).LifeStyle.Singleton);
     }
   }

@@ -2,6 +2,9 @@
 using Continero.Homework.Storages;
 
 namespace Continero.Homework {
+  /// <summary>
+  /// Wrapper/helper class for loading, converting and saving documents.
+  /// </summary>
   public class DocumentService {
     private readonly IDocumentStorage sourceStorage;
     private readonly IDocumentStorage targetStorage;

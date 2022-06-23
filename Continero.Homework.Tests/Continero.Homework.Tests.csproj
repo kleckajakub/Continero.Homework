@@ -72,7 +72,6 @@
     <Compile Include="Convertors\XmlDocumentConvertorTests.cs" />
     <Compile Include="DocumentServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Storages\DocumentStorageFactoryTests.cs" />
     <Compile Include="Storages\FileDocumentStorageTests.cs" />
     <Compile Include="Storages\InMemoryDocumentStorageTests.cs" />
   </ItemGroup>

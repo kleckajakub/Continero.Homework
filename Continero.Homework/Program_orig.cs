@@ -48,15 +48,15 @@ namespace Continero.Homework {
         Text = xdoc.Root.Element("text").Value
       };
 
-      //17. here is dependency on JsonConvert - there is no easy way to use another converter
+      //18. here is dependency on JsonConvert - there is no easy way to use another converter
       var serializedDoc = JsonConvert.SerializeObject(doc);
 
-      //18. path of target file may not exists - here should be some check and user notification
-      //19. FileStream should be created in using block - it should be close, flush and dispose asap
-      //20. output file is always rewrite without user notification
+      //19. path of target file may not exists - here should be some check and user notification
+      //20. FileStream should be created in using block - it should be close, flush and dispose asap
+      //21. output file is always rewrite without user notification
       var targetStream = File.Open(targetFileName, FileMode.Create, FileAccess.Write);
 
-      //21. streamwriter should be created in using block - it should be flush and dispose asap
+      //22. streamwriter should be created in using block - it should be flush and dispose asap
       var sw = new StreamWriter(targetStream);
       sw.Write(serializedDoc);
     }
