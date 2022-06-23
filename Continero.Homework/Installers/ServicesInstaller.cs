@@ -22,15 +22,10 @@ namespace Continero.Homework.Installers {
         Component.For<DocumentConvertorFactory>().LifeStyle.Transient
       );
 
-      var inMemoryDocService = new DocumentService(container.Resolve<InMemoryDocumentStorage>(),
-        container.Resolve<InMemoryDocumentStorage>(), container.Resolve<DocumentConvertorFactory>());
+      var docService = new DocumentService(container.Resolve<FileDocumentStorage>(),
+        container.Resolve<FileDocumentStorage>(), container.Resolve<DocumentConvertorFactory>());
 
-      var fileAndIMemoryDocService = new DocumentService(container.Resolve<InMemoryDocumentStorage>(),
-        container.Resolve<InMemoryDocumentStorage>(), container.Resolve<DocumentConvertorFactory>());
-
-      container.Register(
-        Component.For<DocumentService>().Instance(inMemoryDocService).Named("InMemoryDocService").LifeStyle.Singleton,
-        Component.For<DocumentService>().Instance(fileAndIMemoryDocService).Named("FileAndInMemoryDocService").LifeStyle.Singleton);
+      container.Register(Component.For<DocumentService>().Instance(docService).LifeStyle.Singleton);
     }
   }
 }

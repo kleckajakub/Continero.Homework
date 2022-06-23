@@ -26,7 +26,7 @@ namespace Continero.Homework {
 
     //program/service loop can be here
     public void Run() {
-      var documentService = container.Resolve<DocumentService>("InMemoryDocService");
+      var documentService = container.Resolve<DocumentService>();
       
       ProcessDocument(documentService, "sourceDoc.xml", "targetDoc.json");
       ProcessDocument(documentService, "sourceDoc.json", "targetDoc.xml");

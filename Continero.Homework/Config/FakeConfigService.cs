@@ -2,10 +2,10 @@
   public class FakeConfigService : IConfigService {
     public string Get(string key) {
       if (key == ConfigKeys.SourceDocFilesDir) {
-        return @"c:\temp\source_document.dat";
+        return @"d:\temp\Continero.Homework\source\";
       }
 
-      return @"c:\temp\target_document.dat";
+      return @"d:\temp\Continero.Homework\target\";
     }
   }
 }
