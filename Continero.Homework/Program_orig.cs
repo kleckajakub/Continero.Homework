@@ -4,9 +4,7 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 
 namespace Continero.Homework {
-  //1. class should be placed in separate file
-  //2. missing [Serialiable] attribute
-  [Serializable]
+  //1. třída by měla být umístěna v samostatném souboru
   public class Document {
     public string Title { get; set; }
     public string Text { get; set; }
@@ -14,49 +12,50 @@ namespace Continero.Homework {
 
   internal class Program_orig {
     private static void Main_orig(string[] args) {
-      //3. paths should be defined in config/ini files or we can pass them in args
-      //4. Environment.CurrentDirectory doesn't work in Windows service
+      //2. cesta by měla být definována v config/ini souboru nebo vložená přes args
+      //3. pokud je aplikace spuštěná jako služba, tak Environment.CurrentDirectory nefunguje/nevrací správnou cestu, vždy vrací c:\Windows\system32
       var sourceFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Source Files\\Document1.xml");
       var targetFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Target Files\\Document1.json");
 
       try {
-        //5. we use only file as a source of data - there is no easy way to use another data source (DB/WebService...)
-        //6. FileStream should be created/open in using block - it should be close and dispose asap
-        //7. file may not exist - here should be some check and possible user notification
-        //8. here is a dependency on file system - it is harder to write unit test
+        //4. jako úložiště se zde vždy použije soubor - není zde jednoduchá cesta, jak použít jiné úložiště (memory/DB/WebService...)
+        //5. FileStream by měl být vytvářen v using bloku - ten zajistí jeho uzavření/flush a uvolnění z paměti (dispose) okamžitě poté, co přestaneme stream používat
+        //6. soubor nemusí existovat - měla by tu být kontrola příp. notifikace uživatele
+        //7. je zde přímá závislost na souborovém systému - je těžší testovat tuto část kódu v izolaci
         FileStream sourceStream = File.Open(sourceFileName, FileMode.Open);
-        //9. StreamReader should be created in using block - it should be dispose asap
+
+        //8. StreamReader by měl být vytvářen v using bloku - ten zajistí jeho uzavření/flush a uvolnění z paměti (dispose) okamžitě poté, co přestaneme reader používat
         var reader = new StreamReader(sourceStream);
 
-        //10. input is defined in try..catch block and is not visible for rest of program
+        //9. proměnná input je definovaná uvnitř bloku try..catch a není vidět pro zbytek programu
         string input = reader.ReadToEnd();
       } catch (Exception ex) {
-        //11. if we create and throw new Exception in this way, so we lost stack of the first exception - we have only message of first exception
-        //12. if we throw exception here, so program ends with unhandled exception, so user doesn't know, what's happened and rest of code never be invoke
+        //10. pokud vytvoříme a vyhodíme vyjímku tímto stylem, tak ztratíme stack původní vyjímky, do nové vyjímky zkopírujeme pouze zprávu původní vyjímky
+        //11. pokud vyhodíme vyjímku zde, tak program skončí nestandardně (neošetřená chyba), uživatel neví, co se stalo a zbytek kódu se nespustí
         throw new Exception(ex.Message);
       }
 
-      //13. input could be empty - there should be a check and possible user notification
-      //14. here is a dependency on XML parser - there is no easy way to use another parser
+      //12. proměnná input může být prázdná - měla by tu být kontrola příp. upozornění uživatele
+      //13. je zde přímá závislost na XDocument/XML parseru - neexistuje jednoduchá cesta, jak zvolit jiný parser
       var xdoc = XDocument.Parse(/*input*/"");
 
-      //15. xdoc.Root can be null - possible NullReferenceException
-      //16. xdoc.Root.Element("title/text") can be null - possible NullReferenceException
-      //17. title and text not corresponding with Title and Text in class Document - this elements are not paired
+      //14. xdoc.Root může být null - možná NullReferenceException
+      //15. xdoc.Root.Element("title/text") může být null - možná NullReferenceException
+      //16. title a text neodpovídají jménům proměnných v třídě Document (tyto elementy se nenapárují)
       var doc = new Document {
         Title = xdoc.Root.Element("title").Value,
         Text = xdoc.Root.Element("text").Value
       };
 
-      //18. here is dependency on JsonConvert - there is no easy way to use another converter
+      //17. je zde přímá závislost na JsonConvert - neexistuje jednoduchá cesta, jak zvolit jiný parser
       var serializedDoc = JsonConvert.SerializeObject(doc);
 
-      //19. path of target file may not exists - here should be some check and user notification
-      //20. FileStream should be created in using block - it should be close, flush and dispose asap
-      //21. output file is always rewrite without user notification
+      //18. soubor nemusí existovat - měla by tu být kontrola popř. notifikace uživatele
+      //19. FileStream by měl být vytvářen v using bloku - ten zajistí jeho uzavření/flush a uvolnění z paměti (dispose) okamžitě poté, co přestaneme stream používat 
+      //20. výstupní soubor/dokument je vždy přepsán bez upozornění uživatele (to je spíš vlastnost než chyba - záleží na kontextu)
       var targetStream = File.Open(targetFileName, FileMode.Create, FileAccess.Write);
 
-      //22. streamwriter should be created in using block - it should be flush and dispose asap
+      //21. streamwriter by měl být vytvářen v using bloku - ten zajistí jeho uzavření/flush a uvolnění z paměti (dispose) okamžitě poté, co přestaneme stream používat 
       var sw = new StreamWriter(targetStream);
       sw.Write(serializedDoc);
     }
