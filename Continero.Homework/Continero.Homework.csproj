@@ -60,8 +60,9 @@
     <Compile Include="Convertors\DocumentConvertorFactory.cs" />
     <Compile Include="Convertors\JsonDocumentConvertor.cs" />
     <Compile Include="Convertors\XmlDocumentConvertor.cs" />
-    <Compile Include="DocumentService.cs" />
+    <Compile Include="DocumentDownloader.cs" />
     <Compile Include="Config\FakeConfigService.cs" />
+    <Compile Include="IDocumentDownloader.cs" />
     <Compile Include="IO\DirectoryFacade.cs" />
     <Compile Include="Storages\FileDocumentStorage.cs" />
     <Compile Include="Installers\ServicesInstaller.cs" />

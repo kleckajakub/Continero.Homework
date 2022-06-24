@@ -26,7 +26,7 @@ namespace Continero.Homework {
 
     //program/service loop can be here
     public void Run() {
-      var documentService = container.Resolve<DocumentService>();
+      var documentService = container.Resolve<IDocumentDownloader>();
       
       ProcessDocument(documentService, "sourceDoc.xml", "targetDoc.json");
       ProcessDocument(documentService, "sourceDoc.json", "targetDoc.xml");
@@ -35,9 +35,9 @@ namespace Continero.Homework {
       Console.ReadLine();
     }
 
-    private void ProcessDocument(DocumentService documentService, string sourceDocName, string targetDocName) {
+    private void ProcessDocument(IDocumentDownloader documentDownloader, string sourceDocName, string targetDocName) {
       try {
-        documentService.LoadDocumentAndSaveItInNewFormat(sourceDocName, targetDocName);
+        documentDownloader.DownloadDocument(sourceDocName, targetDocName);
       } catch (Exception ex) {
         Console.WriteLine($"Error occurred during processing document.\r\n{ex.Message}");
       }

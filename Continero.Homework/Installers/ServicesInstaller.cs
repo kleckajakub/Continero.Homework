@@ -21,9 +21,9 @@ namespace Continero.Homework.Installers {
         Component.For<DocumentConvertorFactory>().LifeStyle.Transient
       );
 
-      var docService = new DocumentService(container.Resolve<FileDocumentStorage>(), container.Resolve<FileDocumentStorage>(),
+      var docService = new DocumentDownloader(container.Resolve<FileDocumentStorage>(), container.Resolve<FileDocumentStorage>(),
         container.Resolve<DocumentConvertorFactory>());
-      container.Register(Component.For<DocumentService>().Instance(docService).LifeStyle.Singleton);
+      container.Register(Component.For<IDocumentDownloader>().Instance(docService).LifeStyle.Singleton);
     }
   }
 }

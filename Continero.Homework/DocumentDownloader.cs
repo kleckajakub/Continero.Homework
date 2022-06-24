@@ -3,20 +3,22 @@ using Continero.Homework.Storages;
 
 namespace Continero.Homework {
   /// <summary>
-  /// Wrapper/helper class for loading, converting and saving documents.
+  /// Pomocná třída pro načtení/zkonvertování a uložení dokumentů.
+  /// Slepí vše dohromady - stažení surových dat doc, převedení na doc, převedení na nový formát a uložení do nového úložiště
+  /// Náhrada původního kódu v souboru Program_orig.cs
   /// </summary>
-  public class DocumentService {
+  public class DocumentDownloader : IDocumentDownloader {
     private readonly IDocumentStorage sourceStorage;
     private readonly IDocumentStorage targetStorage;
     private readonly DocumentConvertorFactory convertorFactory;
 
-    public DocumentService(IDocumentStorage sourceStorage, IDocumentStorage targetStorage, DocumentConvertorFactory convertorFactory) {
+    public DocumentDownloader(IDocumentStorage sourceStorage, IDocumentStorage targetStorage, DocumentConvertorFactory convertorFactory) {
       this.sourceStorage = sourceStorage;
       this.targetStorage = targetStorage;
       this.convertorFactory = convertorFactory;
     }
 
-    public void LoadDocumentAndSaveItInNewFormat(string sourceDocName, string targetDocName) {
+    public void DownloadDocument(string sourceDocName, string targetDocName) {
       var sourceDocData = sourceStorage.Load(sourceDocName);
       var sourceDocConvertor = convertorFactory.Create(sourceDocName);
       var sourceDoc = sourceDocConvertor.ToDoc(sourceDocData);

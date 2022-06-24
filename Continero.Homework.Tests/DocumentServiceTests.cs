@@ -21,9 +21,9 @@ namespace Continero.Homework.Tests {
       convertorFactory.Create("sourceDoc.xml").Returns(sourceConvertor);
       convertorFactory.Create("targetDoc.json").Returns(targetConvertor);
 
-      var documentService = new DocumentService(storage1, storage2, convertorFactory);
+      var documentService = new DocumentDownloader(storage1, storage2, convertorFactory);
 
-      documentService.LoadDocumentAndSaveItInNewFormat("sourceDoc.xml", "targetDoc.json");
+      documentService.DownloadDocument("sourceDoc.xml", "targetDoc.json");
 
       var targetDocBytes = storage2.Load("targetDoc.json");
       targetDocBytes.Should().BeEquivalentTo(expectedTargetBytes);
